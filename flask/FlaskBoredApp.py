@@ -23,7 +23,7 @@ from datetime import timedelta
 from flask_wtf import FlaskForm  # Flask_WTF on install
 
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import or_
+from sqlalchemy import or_, and_
 from wtforms import StringField, SubmitField, DateField, PasswordField, EmailField
 from wtforms.validators import DataRequired
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -33,9 +33,10 @@ import json
 import requests
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = SECRET_KEY # secret key for the WTForm forms you create
+app.config['SECRET_KEY'] = SECRET_KEY  # secret key for the WTForm forms you create
 app.register_blueprint(second, url_prefix="/admin")
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:{PASSWORD}@localhost/{DatabaseName}'.format(PASSWORD=DATABASEPASSWORD, DatabaseName=DATABASENAME)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:{PASSWORD}@localhost/{DatabaseName}'.format(
+    PASSWORD=DATABASEPASSWORD, DatabaseName=DATABASENAME)
 app.permanent_session_lifetime = timedelta(
     days=1)  # this lets us store out permanent session data for x days/minutes etc so the user doesn't have to re-login everytime they close the tab
 
@@ -133,13 +134,10 @@ def activityLinked():
             url = "{}/".format(APIurl)
             activity = connect_to_api(url)
 
-            if activity['link'] :
+            if activity['link']:
                 activityID = activity['key']
                 activityInfo = display_the_activity(activityID)
                 return render_template('user.html', activityInfo=activityInfo, clicked=True)
-
-
-
 
 
 # display activity info, we can use if else statements to formate the string in certain ways depending on what the activity selection was based on
@@ -147,7 +145,8 @@ def display_the_activity(activityID):
     url = "{}?key={}".format(APIurl, activityID)
     activity = connect_to_api(url)
 
-    session["activityID"] = activityID # saving the activity id into the session for the activity generated - for later use
+    session[
+        "activityID"] = activityID  # saving the activity id into the session for the activity generated - for later use
 
     activity_name = activity['activity']
     participant_number = activity['participants']
@@ -166,29 +165,44 @@ def display_the_activity(activityID):
 @app.route("/saveActivity", methods=["GET", "POST"])
 def saveActivity():
     activityID = session['activityID']
-    UserID = get_user_id()
-
-    # Connect to API to get activity info
-    url = "{}?key={}".format(APIurl, activityID)
-    activity = connect_to_api(url)
-
-    activity_name = activity['activity']
-    participant_number = activity['participants']
-    price = activity['price']
-    activity_type = activity['type']
-
-    # Run query to save activity info
-    add_activity = favourites(activityID=activityID, UserID=UserID, activity=activity_name,
-                              participants=participant_number, price=price,
-                              type=activity_type)
-    database.session.add(add_activity)
-    database.session.commit()
-
+    UserID = session['UserID']
     activityInfo = display_the_activity(activityID)
 
-    flash("Activity saved to favourites!", "success")
+    if check_if_activity_is_in_favourites(activityID, UserID) is True:
+        flash("Activity already exists in favourites", "error")
+    else:
+        # Connect to API to get activity info
+        url = "{}?key={}".format(APIurl, activityID)
+        activity = connect_to_api(url)
+
+        activity_name = activity['activity']
+        participant_number = activity['participants']
+        price = activity['price']
+        activity_type = activity['type']
+
+        # Run query to save activity info
+        add_activity = favourites(activityID=activityID, UserID=UserID, activity=activity_name,
+                                  participants=participant_number, price=price,
+                                  type=activity_type)
+        database.session.add(add_activity)
+        database.session.commit()
+
+
+
+        flash("Activity saved to favourites!", "success")
 
     return render_template('user.html', clicked=True, activityInfo=activityInfo)
+
+
+def check_if_activity_is_in_favourites(activityID, UserID):
+    favouritesExists = favourites.query.filter(and_(favourites.activityID == activityID, favourites.UserID == UserID)).first()
+
+    if favouritesExists:  # if True
+        return True
+    else:  # if False
+        return False
+
+
 
 
 # SQL-ALCHEMY DATABASE CONNECTIONS : 'the_users' & 'favourites'
