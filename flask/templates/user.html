@@ -79,8 +79,10 @@
 
 <!-- Improve this with an else statement so that when a user inserts nothing the random doesn't just automatically run -->
 {% if clicked  %}
+
        <h2>Activity</h2>
-       <p class = "activity">{{ activityInfo }}</p>
+       <p class = "activity">{{ activityInfo }}. <a target="_blank" href="{{ link_str }}">{{ link_str }}</a></p>
+
 {% endif %}
 
 <form action="{{ url_for('saveActivity') }}" method="POST">

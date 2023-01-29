@@ -63,9 +63,9 @@ def randomActivity():
         url = "{}/".format(APIurl)
         activity = connect_to_api(url)
 
-        activity_ID = activity['key']
+        activityID = activity['key']
 
-        activityInfo = display_the_activity(activity_ID)
+        activityInfo, link_str = display_the_activity(activityID)
 
         return render_template('user.html', activityInfo=activityInfo,
                                clicked=clicked)
@@ -80,9 +80,9 @@ def participantNumber():
         url = "{}?participants={}".format(APIurl, number_of_participants)
         activity = connect_to_api(url)
 
-        activity_ID = activity['key']
+        activityID = activity['key']
 
-        activityInfo = display_the_activity(activity_ID)
+        activityInfo, link_str = display_the_activity(activityID)
 
         return render_template('user.html', activityInfo=activityInfo,
                                clicked=clicked, number_of_participants=number_of_participants)
@@ -99,9 +99,9 @@ def budgetRange():
         url = "{}?minprice={}&maxprice={}".format(APIurl, minimumBudget, maximumBudget)
         activity = connect_to_api(url)
 
-        activity_ID = activity['key']
+        activityID = activity['key']
 
-        activityInfo = display_the_activity(activity_ID)
+        activityInfo, link_str = display_the_activity(activityID)
 
         return render_template('user.html', activityInfo=activityInfo,
                                clicked=clicked, minimumBudget=minimumBudget, maximumBudget=maximumBudget)
@@ -118,7 +118,7 @@ def activityType():
 
         activityID = activity['key']
 
-        activityInfo = display_the_activity(activityID)
+        activityInfo, link_str = display_the_activity(activityID)
 
         return render_template('user.html', activityInfo=activityInfo,
                                clicked=clicked, activityType=activityType)
@@ -136,8 +136,9 @@ def activityLinked():
 
             if activity['link']:
                 activityID = activity['key']
-                activityInfo = display_the_activity(activityID)
-                return render_template('user.html', activityInfo=activityInfo, clicked=True)
+                activityInfo, link_str = display_the_activity(activityID)
+
+                return render_template('user.html', activityInfo=activityInfo, clicked=True, link_str=link_str )
 
 
 # display activity info, we can use if else statements to formate the string in certain ways depending on what the activity selection was based on
@@ -156,10 +157,10 @@ def display_the_activity(activityID):
 
     # this formats the link to the string if a link exists, otherwise and empty string is formatted
     # this also makes the link hyperlinked
-    link_str = f" Link: {activity_link}" if activity_link else ""
+    link_str = f"{activity_link}" if activity_link else ""
 
-    return "{}, costs £{}, it is a {} activity and can be done by {} participant{}.{}".format(
-        activity_name, price, activity_type, participant_number, "" if participant_number == 1 else "s", link_str)
+    return "{}, costs £{}, it is a {} activity and can be done by {} participant{}".format(
+        activity_name, price, activity_type, participant_number, "" if participant_number == 1 else "s"), link_str
 
 
 @app.route("/saveActivity", methods=["GET", "POST"])
