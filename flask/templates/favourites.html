@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Favourites{% endblock %}
+{% block content %}
+<h1>Favourites Page</h1>
+
+     {% for message in get_flashed_messages() %}
+         <div class="alert alert-info alert-dismissible fade show" role="alert" id="alert-message">
+         {{ message }}
+           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+
+         <script>
+         setTimeout(() => {
+             document.getElementById("alert-message").style.opacity = "0";
+         }, 1700);
+         </script>
+
+     {% endfor %}
+
+
+
+
+<h1>{{ session["FirstName"] }}'s favourite activities:</h1>
+    <ul>
+    {% for activity_info in users_favourites %}
+        <li>{{ activity_info[0] }} - {{ activity_info[1] }} participant/s - {{ activity_info[2] }} activity - £{{ activity_info[3] }} </li>
+    {%endfor%}
+    </ul>
+{% endblock %}
+
+
