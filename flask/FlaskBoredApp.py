@@ -359,8 +359,8 @@ def login():
                     flash("Log in Successful!", "success")
                     return redirect(url_for("user"))
 
-            else:
-                flash("Log in Unsuccessful, Please try again!", "error")
+
+            flash("Log in Unsuccessful, Please try again!", "error")
 
     return render_template("login.html", emailOrUsername=emailOrUsername, password=password, form=form)
 
