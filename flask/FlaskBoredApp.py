@@ -206,6 +206,7 @@ def check_if_activity_is_in_favourites(activityID, UserID):
 
 
 
+
 # SQL-ALCHEMY DATABASE CONNECTIONS : 'the_users' & 'favourites'
 
 # DEFINES THE TABLE SCHEMA IN OUR DATABASE
@@ -363,6 +364,16 @@ def login():
             flash("Log in Unsuccessful, Please try again!", "error")
 
     return render_template("login.html", emailOrUsername=emailOrUsername, password=password, form=form)
+
+"""def reset_password(self, user_ID, new_password):
+        query = "UPDATE the_users SET the_users.Password = SHA1('{NEWPASSWORD}') WHERE UserID = '{USERID}')".format(
+            USERID=user_ID, NEWPASSWORD=new_password)
+
+        self.execute_database_query(query)
+
+        return "Password has been reset""""
+
+
 
 
 # this must be called after a user has logged in, so we can save the user's UserID into the session for later use
