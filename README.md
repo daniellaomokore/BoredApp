@@ -12,7 +12,7 @@ NEW LEARNS:
 -werkzeug
 -'permanent_session_lifetime' for flask app
 -how to use python code in html {{% %}}, {{}}
--bootstrap & customizing flashes/alert messages based on message type and colour and fading them awayover time
+-bootstrap & customizing flashes/alert messages based on message type and colour and fading them away over time
 
 THINGS I DID TO OPTIMIZE THE APP/MAKE IT LESS EXPENSIVE/ FASTER/ SAFER
 
