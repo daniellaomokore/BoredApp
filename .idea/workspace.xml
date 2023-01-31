@@ -5,7 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b4195fdd-46a9-47d9-b6bf-f7bce79bf27e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/flask/templates/javascript.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/flask/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask/templates/base1.html" beforeDir="false" afterPath="$PROJECT_DIR$/flask/templates/base1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask/templates/favourites.html" beforeDir="false" afterPath="$PROJECT_DIR$/flask/templates/favourites.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask/templates/forgotpassword.html" beforeDir="false" afterPath="$PROJECT_DIR$/flask/templates/forgotpassword.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/flask/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask/templates/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/flask/templates/signup.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +40,9 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Others\Desktop\BoredApp1" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Others\Desktop\BoredApp1\flask\templates" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
