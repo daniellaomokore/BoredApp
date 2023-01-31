@@ -7,7 +7,6 @@ Then: Create a wireframe of you want the app to look/the layout
 # ux design for signup and log in - no tedious, allow signup with Google etc
 # add exception handling for each time a user has an input, if the activity is already in the favourites
 
-
 Room for improvement
 Given that this is still a very basic “skeleton” version of User Authentication/Login there are many opportunities for improvements. Some of them are as follows:
 
