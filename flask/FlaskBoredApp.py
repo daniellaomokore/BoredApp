@@ -4,7 +4,7 @@ Then: Create a wireframe of you want the app to look/the layout
 # make favourites add to the end of the list as it's currently adding in the middle
 # Classes & different py files
 # see if using flask login is better?
-# ux design for signup and log in- no tedious, allow signup with Google etc
+# ux design for signup and log in - no tedious, allow signup with Google etc
 # add exception handling for each time a user has an input, if the activity is already in the favourites
 
 
@@ -58,87 +58,104 @@ def connect_to_api(url):
 
 @app.route("/randomActivity", methods=["GET", "POST"])
 def randomActivity():
-    if request.method == 'POST':
-        clicked = True
-        url = "{}/".format(APIurl)
-        activity = connect_to_api(url)
+    if is_user_logged_in() is True:
+        if request.method == 'POST':
+            clicked = True
+            url = "{}/".format(APIurl)
+            activity = connect_to_api(url)
 
-        activityID = activity['key']
+            activityID = activity['key']
 
-        activityInfo, link_str = display_the_activity(activityID)
+            activityInfo, link_str = display_the_activity(activityID)
 
-        return render_template('user.html', activityInfo=activityInfo,
-                               clicked=clicked)
+            return render_template('user.html', activityInfo=activityInfo,
+                                   clicked=clicked)
+    else:
+        return redirect(url_for("login"))
 
 
 @app.route("/participantNumber", methods=["GET", "POST"])
 def participantNumber():
-    if request.method == 'POST':
-        form = request.form  # get the html form
-        clicked = True
-        number_of_participants = form["participants"]
-        url = "{}?participants={}".format(APIurl, number_of_participants)
-        activity = connect_to_api(url)
+    if is_user_logged_in() is True:
 
-        activityID = activity['key']
+        if request.method == 'POST':
+            form = request.form  # get the html form
+            clicked = True
+            number_of_participants = form["participants"]
+            url = "{}?participants={}".format(APIurl, number_of_participants)
+            activity = connect_to_api(url)
 
-        activityInfo, link_str = display_the_activity(activityID)
+            activityID = activity['key']
 
-        return render_template('user.html', activityInfo=activityInfo,
-                               clicked=clicked, number_of_participants=number_of_participants)
+            activityInfo, link_str = display_the_activity(activityID)
+
+            return render_template('user.html', activityInfo=activityInfo,
+                                   clicked=clicked, number_of_participants=number_of_participants)
+    else:
+        return redirect(url_for("login"))
 
 
 @app.route("/budgetRange", methods=["GET", "POST"])
 def budgetRange():
-    if request.method == 'POST':
-        form = request.form  # get the html form
-        clicked = True
-        minimumBudget = form["minimumBudget"]
-        maximumBudget = form["maximumBudget"]
+    if is_user_logged_in() is True:
+        if request.method == 'POST':
+            form = request.form  # get the html form
+            clicked = True
+            minimumBudget = form["minimumBudget"]
+            maximumBudget = form["maximumBudget"]
 
-        url = "{}?minprice={}&maxprice={}".format(APIurl, minimumBudget, maximumBudget)
-        activity = connect_to_api(url)
+            url = "{}?minprice={}&maxprice={}".format(APIurl, minimumBudget, maximumBudget)
+            activity = connect_to_api(url)
 
-        activityID = activity['key']
+            activityID = activity['key']
 
-        activityInfo, link_str = display_the_activity(activityID)
+            activityInfo, link_str = display_the_activity(activityID)
 
-        return render_template('user.html', activityInfo=activityInfo,
-                               clicked=clicked, minimumBudget=minimumBudget, maximumBudget=maximumBudget)
+            return render_template('user.html', activityInfo=activityInfo,
+                                   clicked=clicked, minimumBudget=minimumBudget, maximumBudget=maximumBudget)
+    else:
+        return redirect(url_for("login"))
 
 
 @app.route("/activityType", methods=["GET", "POST"])
 def activityType():
-    if request.method == 'POST':
-        form = request.form  # get the html form
-        clicked = True
-        activityType = form["activityType"]
-        url = "{}?type={}".format(APIurl, activityType)
-        activity = connect_to_api(url)
+    if is_user_logged_in() is True:
+        if request.method == 'POST':
+            form = request.form  # get the html form
+            clicked = True
+            activityType = form["activityType"]
+            url = "{}?type={}".format(APIurl, activityType)
+            activity = connect_to_api(url)
 
-        activityID = activity['key']
+            activityID = activity['key']
 
-        activityInfo, link_str = display_the_activity(activityID)
+            activityInfo, link_str = display_the_activity(activityID)
 
-        return render_template('user.html', activityInfo=activityInfo,
-                               clicked=clicked, activityType=activityType)
+            return render_template('user.html', activityInfo=activityInfo,
+                                   clicked=clicked, activityType=activityType)
+    else:
+        return redirect(url_for("login"))
 
 
 @app.route("/activityLinked", methods=["GET", "POST"])
 def activityLinked():
-    if request.method == 'POST':
+    if is_user_logged_in() is True:
+        if request.method == 'POST':
 
-        activity_with_link_found = False
+            activity_with_link_found = False
 
-        while not activity_with_link_found:
-            url = "{}/".format(APIurl)
-            activity = connect_to_api(url)
+            while not activity_with_link_found:
+                url = "{}/".format(APIurl)
+                activity = connect_to_api(url)
 
-            if activity['link']:
-                activityID = activity['key']
-                activityInfo, link_str = display_the_activity(activityID)
+                if activity['link']:
+                    activityID = activity['key']
+                    activityInfo, link_str = display_the_activity(activityID)
 
-                return render_template('user.html', activityInfo=activityInfo, clicked=True, link_str=link_str )
+                    return render_template('user.html', activityInfo=activityInfo, clicked=True, link_str=link_str)
+
+    else:
+        return redirect(url_for("login"))
 
 
 # display activity info, we can use if else statements to formate the string in certain ways depending on what the activity selection was based on
@@ -165,46 +182,45 @@ def display_the_activity(activityID):
 
 @app.route("/saveActivity", methods=["GET", "POST"])
 def saveActivity():
-    activityID = session['activityID']
-    UserID = session['UserID']
-    activityInfo = display_the_activity(activityID)
+    if is_user_logged_in() is True:
+        activityID = session['activityID']
+        UserID = session['UserID']
+        activityInfo = display_the_activity(activityID)
 
-    if check_if_activity_is_in_favourites(activityID, UserID) is True:
-        flash("Activity already exists in favourites", "error")
+        if check_if_activity_is_in_favourites(activityID, UserID) is True:
+            flash("Activity already exists in favourites", "error")
+        else:
+            # Connect to API to get activity info
+            url = "{}?key={}".format(APIurl, activityID)
+            activity = connect_to_api(url)
+
+            activity_name = activity['activity']
+            participant_number = activity['participants']
+            price = activity['price']
+            activity_type = activity['type']
+
+            # Run query to save activity info
+            add_activity = favourites(activityID=activityID, UserID=UserID, activity=activity_name,
+                                      participants=participant_number, price=price,
+                                      type=activity_type)
+            database.session.add(add_activity)
+            database.session.commit()
+
+            flash("Activity saved to favourites!", "success")
+
+        return render_template('user.html', clicked=True, activityInfo=activityInfo)
     else:
-        # Connect to API to get activity info
-        url = "{}?key={}".format(APIurl, activityID)
-        activity = connect_to_api(url)
-
-        activity_name = activity['activity']
-        participant_number = activity['participants']
-        price = activity['price']
-        activity_type = activity['type']
-
-        # Run query to save activity info
-        add_activity = favourites(activityID=activityID, UserID=UserID, activity=activity_name,
-                                  participants=participant_number, price=price,
-                                  type=activity_type)
-        database.session.add(add_activity)
-        database.session.commit()
-
-
-
-        flash("Activity saved to favourites!", "success")
-
-    return render_template('user.html', clicked=True, activityInfo=activityInfo)
+        return redirect(url_for("login"))
 
 
 def check_if_activity_is_in_favourites(activityID, UserID):
-    favouritesExists = favourites.query.filter(and_(favourites.activityID == activityID, favourites.UserID == UserID)).first()
+    favouritesExists = favourites.query.filter(
+        and_(favourites.activityID == activityID, favourites.UserID == UserID)).first()
 
     if favouritesExists:  # if True
         return True
     else:  # if False
         return False
-
-
-
 
 
 # SQL-ALCHEMY DATABASE CONNECTIONS : 'the_users' & 'favourites'
@@ -279,91 +295,101 @@ class forgotPassword(FlaskForm):
 # FLASK APP SERVER FUNCTIONS
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
-    firstname = lastname = email = dateofbirth = city = username = password = None
-    form = signUpForm()
+    if is_user_logged_in() is True:
+        return redirect(url_for("user"))
+    else:
+        firstname = lastname = email = dateofbirth = city = username = password = None
+        form = signUpForm()
 
-    # if a POST request was made from the signup page
-    if request.method == "POST":
+        # if a POST request was made from the signup page
+        if request.method == "POST":
 
-        # if the inputted form data is all valid.
-        if form.validate_on_submit():
-            firstname = form.firstname.data
-            form.firstname.data = ''
-            lastname = form.lastname.data
-            form.lastname.data = ''
-            email = form.email.data
-            form.email.data = ''
-            dateofbirth = form.dateofbirth.data
-            form.dateofbirth.data = ''
-            city = form.city.data
-            form.city.data = ''
-            username = form.username.data
-            form.username.data = ''
-            password = form.password.data
-            form.password.data = ''
+            # if the inputted form data is all valid.
+            if form.validate_on_submit():
+                firstname = form.firstname.data
+                form.firstname.data = ''
+                lastname = form.lastname.data
+                form.lastname.data = ''
+                email = form.email.data
+                form.email.data = ''
+                dateofbirth = form.dateofbirth.data
+                form.dateofbirth.data = ''
+                city = form.city.data
+                form.city.data = ''
+                username = form.username.data
+                form.username.data = ''
+                password = form.password.data
+                form.password.data = ''
 
-            password = generate_password_hash(password)
+                password = generate_password_hash(password)
 
-            # Check if there's a user in the database with this username/email already
-            # this returns the user row with this email/username or None if it doesn't exist
-            user_exists = the_users.query.filter(or_(the_users.Email == email, the_users.Username == username)).first()
+                # Check if there's a user in the database with this username/email already
+                # this returns the user row with this email/username or None if it doesn't exist
+                user_exists = the_users.query.filter(
+                    or_(the_users.Email == email, the_users.Username == username)).first()
 
-            if user_exists:
-                flash("A User already exists with this email/username.", "error")
+                if user_exists:
+                    flash("A User already exists with this email/username.", "error")
+                else:
+                    # save user into database
+                    new_user = the_users(FirstName=firstname, LastName=lastname, Email=email, DOB=dateofbirth,
+                                         City=city,
+                                         Username=username, Password=password)  # hash password
+                    database.session.add(new_user)
+                    database.session.commit()
+
+                    flash("Sign Up Successful!!", "success")
             else:
-                # save user into database
-                new_user = the_users(FirstName=firstname, LastName=lastname, Email=email, DOB=dateofbirth, City=city,
-                                     Username=username, Password=password)  # hash password
-                database.session.add(new_user)
-                database.session.commit()
+                flash("Signup details are invalid", "error")
 
-                flash("Sign Up Successful!!", "success")
-        else:
-            flash("Signup details are invalid", "error")
-
-    return render_template("signup.html", firstname=firstname, lastname=lastname, email=email, dateofbirth=dateofbirth,
-                           city=city, username=username, password=password, form=form)
+        return render_template("signup.html", firstname=firstname, lastname=lastname, email=email,
+                               dateofbirth=dateofbirth,
+                               city=city, username=username, password=password, form=form)
 
 
 @app.route("/login", methods=["POST", "GET"])
 def login():
-    emailOrUsername = password = None
-    form = logInForm()
+    if is_user_logged_in() is False:
+        emailOrUsername = password = None
+        form = logInForm()
 
-    # if a POST request was made from the signup page
-    if request.method == "POST":
-        # if the inputted form data is all valid.
-        if form.validate_on_submit():
-            emailOrUsername = form.emailOrUsername.data
-            form.emailOrUsername.data = ''
-            password = form.password.data
-            form.password.data = ''
+        # if a POST request was made from the signup page
+        if request.method == "POST":
+            # if the inputted form data is all valid.
+            if form.validate_on_submit():
+                emailOrUsername = form.emailOrUsername.data
+                form.emailOrUsername.data = ''
+                password = form.password.data
+                form.password.data = ''
 
-            # Check if user used their email or username to login
-            # returns a value or none if a user doesn't exist with these matching credentials
+                # Check if user used their email or username to login
+                # returns a value or none if a user doesn't exist with these matching credentials
 
-            # check if a username or email was entered
-            if "@" in emailOrUsername:
-                session['Email'] = emailOrUsername  # saves the users email into the session
-                user = database.session.query(the_users).filter_by(Email=emailOrUsername).first()
-            else:
-                session['Username'] = emailOrUsername  # saves the users email into the session
-                user = database.session.query(the_users).filter_by(Username=emailOrUsername).first()
+                # check if a username or email was entered
+                if "@" in emailOrUsername:
+                    session['Email'] = emailOrUsername  # saves the users email into the session
+                    user = database.session.query(the_users).filter_by(Email=emailOrUsername).first()
+                else:
+                    session['Username'] = emailOrUsername  # saves the users email into the session
+                    user = database.session.query(the_users).filter_by(Username=emailOrUsername).first()
 
-            # if a user exists in the database with this username/email
-            if user:
-                # compare the hashed password from the database to the password the user logged in
-                if check_password_hash(user.Password, password):
-                    session['UserID'] = get_user_id()  # save the users ID to a session for later use
-                    session['FirstName'] = get_user_firstname()
+                # if a user exists in the database with this username/email
+                if user:
+                    # compare the hashed password from the database to the password the user logged in
+                    if check_password_hash(user.Password, password):
+                        session['UserID'] = get_user_id()  # save the users ID to a session for later use
+                        session['FirstName'] = get_user_firstname()
 
-                    flash("Log in Successful!", "success")
-                    return redirect(url_for("user"))
+                        flash("Log in Successful!", "success")
+                        return redirect(url_for("user"))
 
+                flash("Log in Unsuccessful, Please try again!", "error")
 
-            flash("Log in Unsuccessful, Please try again!", "error")
+        return render_template("login.html", emailOrUsername=emailOrUsername, password=password, form=form)
 
-    return render_template("login.html", emailOrUsername=emailOrUsername, password=password, form=form)
+    else:
+        return redirect(url_for("user"))
+
 
 """def reset_password(self, user_ID, new_password):
         query = "UPDATE the_users SET the_users.Password = SHA1('{NEWPASSWORD}') WHERE UserID = '{USERID}')".format(
@@ -373,7 +399,6 @@ def login():
 
         return "Password has been reset
 """
-
 
 
 # this must be called after a user has logged in, so we can save the user's UserID into the session for later use
@@ -433,25 +458,37 @@ def home():
 
 @app.route("/favourites")
 def view_favourites():
-    users_favourites = (
-        database.session.query(favourites.activity, favourites.participants, favourites.type, favourites.price)
-        .filter(favourites.UserID == session["UserID"])
-        .all())
-
-    return render_template("favourites.html", users_favourites=users_favourites)
+    if is_user_logged_in() is True:
+        users_favourites = (
+            database.session.query(favourites.activity, favourites.participants, favourites.type, favourites.price)
+            .filter(favourites.UserID == session["UserID"])
+            .all())
+        return render_template("favourites.html", users_favourites=users_favourites)
+    else:
+        return redirect(url_for("login"))
 
 
 @app.route("/activity")  # < > lets you pass value through to function as a parameter
 def activity():
-    return render_template("activityPage.html")
+    if is_user_logged_in() is True:
+        return render_template("activityPage.html")
+    else:
+        return redirect(url_for("login"))
 
 
 @app.route("/user", methods=["POST", "GET"])
 def user():
-    if "Username" or "Email" in session:  # if the user has logged in
+    if is_user_logged_in() is True:
         return render_template("user.html")
     else:
         return redirect(url_for("login"))
+
+
+def is_user_logged_in():
+    if "UserID" in session:  # if the user has logged in
+        return True
+    else:
+        return False
 
 
 @app.route("/logout")
@@ -462,6 +499,9 @@ def logout():
     session.pop("Username", None)  # removing the data from our session dict
     session.pop("Email", None)  # removing the data from our session dict
     session.pop("password", None)  # removing the data from our session dict
+    session.pop("UserID", None)  # removing the data from our session dict
+    session.pop("FirstName", None)  # removing the data from our session dict
+
     return redirect(url_for("home"))  # when we log out ,redirect to the home page
 
 
