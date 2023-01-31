@@ -8,11 +8,11 @@ API: https://www.boredapi.com/
 NEW LEARNS:
 
 -sqlalchemy 
--flask forms instead of html forms for validation, inputting images, documents etc, csrf token
--werkzeug
--'permanent_session_lifetime' for flask app
--how to use python code in html {{% %}}, {{}}
--bootstrap & customizing flashes/alert messages based on message type and colour and fading them away over time
+- flask forms instead of html forms for validation, inputting images, documents etc, csrf token
+- werkzeug
+- 'permanent_session_lifetime' for flask app
+- how to use python code in html {{% %}}, {{}}
+- bootstrap & customizing flashes/alert messages based on message type and colour and fading them away over time
 
 THINGS I DID TO OPTIMIZE THE APP/MAKE IT LESS EXPENSIVE/ FASTER/ SAFER
 
@@ -23,11 +23,17 @@ THINGS I DID TO OPTIMIZE THE APP/MAKE IT LESS EXPENSIVE/ FASTER/ SAFER
 - sqlalchemy to query the database instead of using raw sql to prevent SQL injection attacks
 
 Libraries Used:
-pymysql
-Flask_WTF
-Flask
-datetime
-flask_sqlalchemy
-wtforms
-werkzeug
-requests
+- pymysql
+- Flask_WTF
+- Flask
+- datetime
+- flask_sqlalchemy
+- wtforms
+- werkzeug
+- requests
+- regex
+
+Exception/Error Handling
+- When trying to access pages whilst not logged in
+- for invalid/incorrect input or out of bounds input
+- regex for user password to be secure

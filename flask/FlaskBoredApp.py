@@ -1,11 +1,10 @@
 """
 Then: Create a wireframe of you want the app to look/the layout
-# make the code work so the user can't access the user page unless logged in-flask login?
+# use JavaScript for the click using onClicked and to make a back button
 # make favourites add to the end of the list as it's currently adding in the middle
-# Classes & different py files
+# Classes & different py files *******
 # see if using flask login is better?
 # ux design for signup and log in - no tedious, allow signup with Google etc
-# add exception handling for each time a user has an input, if the activity is already in the favourites
 
 Room for improvement
 Given that this is still a very basic “skeleton” version of User Authentication/Login there are many opportunities for improvements. Some of them are as follows:
@@ -30,6 +29,7 @@ from second import second
 from config import SECRET_KEY, DATABASEPASSWORD, DATABASENAME
 import json
 import requests
+import re
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = SECRET_KEY  # secret key for the WTForm forms you create
@@ -81,15 +81,26 @@ def participantNumber():
             form = request.form  # get the html form
             clicked = True
             number_of_participants = form["participants"]
-            url = "{}?participants={}".format(APIurl, number_of_participants)
-            activity = connect_to_api(url)
 
-            activityID = activity['key']
+            # Invalid Input Handling for user input
+            regex_requirements = re.compile(r"^[1-5]|8$")
 
-            activityInfo, link_str = display_the_activity(activityID)
+            participant_no_valid = regex_requirements.fullmatch(number_of_participants)  # returns ['0' if True or None is False]
 
-            return render_template('user.html', activityInfo=activityInfo,
-                                   clicked=clicked, number_of_participants=number_of_participants)
+            if participant_no_valid:
+                url = "{}?participants={}".format(APIurl, number_of_participants)
+                activity = connect_to_api(url)
+
+                activityID = activity['key']
+
+                activityInfo, link_str = display_the_activity(activityID)
+
+                return render_template('user.html', activityInfo=activityInfo,
+                                       clicked=clicked, number_of_participants=number_of_participants)
+            else:
+                flash("Enter a Participant number from 1-5 or 8.", "error")
+                return render_template("user.html")
+
     else:
         return redirect(url_for("login"))
 
@@ -103,15 +114,26 @@ def budgetRange():
             minimumBudget = form["minimumBudget"]
             maximumBudget = form["maximumBudget"]
 
-            url = "{}?minprice={}&maxprice={}".format(APIurl, minimumBudget, maximumBudget)
-            activity = connect_to_api(url)
+            # Invalid Input Handling for user input
+            regex_requirements = re.compile(r"^[0-1]")
 
-            activityID = activity['key']
+            budget_range_valid = regex_requirements.fullmatch(
+                minimumBudget, maximumBudget)  # returns ['0' if True or None is False]
 
-            activityInfo, link_str = display_the_activity(activityID)
+            if budget_range_valid:
+                url = "{}?minprice={}&maxprice={}".format(APIurl, minimumBudget, maximumBudget)
+                activity = connect_to_api(url)
 
-            return render_template('user.html', activityInfo=activityInfo,
-                                   clicked=clicked, minimumBudget=minimumBudget, maximumBudget=maximumBudget)
+                activityID = activity['key']
+
+                activityInfo, link_str = display_the_activity(activityID)
+
+                return render_template('user.html', activityInfo=activityInfo,
+                                       clicked=clicked, minimumBudget=minimumBudget, maximumBudget=maximumBudget)
+            else:
+                flash("Budget Range invalid, try again", "error")
+                return render_template("user.html")
+
     else:
         return redirect(url_for("login"))
 
@@ -123,15 +145,28 @@ def activityType():
             form = request.form  # get the html form
             clicked = True
             activityType = form["activityType"]
-            url = "{}?type={}".format(APIurl, activityType)
-            activity = connect_to_api(url)
 
-            activityID = activity['key']
+            # Invalid Input Handling for user input
+            # It is made not case-sensitive
+            regex_requirements = re.compile(r"\b(education|recreational|social|diy|charity|cooking|relaxation|music|busywork)\b", re.IGNORECASE)
 
-            activityInfo, link_str = display_the_activity(activityID)
+            activity_type_valid = regex_requirements.fullmatch(
+                activityType)  # returns ['0' if True or None is False]
 
-            return render_template('user.html', activityInfo=activityInfo,
-                                   clicked=clicked, activityType=activityType)
+            if activity_type_valid:
+                url = "{}?type={}".format(APIurl, activityType.lower())  # .lower(): we make it all lowercase here to ensure we can correctly access the api key without errors since the user input it not case sensitive
+                activity = connect_to_api(url)
+
+                activityID = activity['key']
+
+                activityInfo, link_str = display_the_activity(activityID)
+
+                return render_template('user.html', activityInfo=activityInfo,
+                                       clicked=clicked, activityType=activityType)
+            else:
+                flash("Activity Type invalid, try again.", "error")
+                return render_template("user.html")
+
     else:
         return redirect(url_for("login"))
 
