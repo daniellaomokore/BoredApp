@@ -371,8 +371,8 @@ def login():
 
         self.execute_database_query(query)
 
-        return "Password has been reset""""
-
+        return "Password has been reset
+"""
 
 
 
