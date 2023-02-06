@@ -28,7 +28,6 @@ import requests
 APIurl = "http://www.boredapi.com/api/activity"
 
 
-
 class DatabaseFunctions:
 
     def __int__(self):

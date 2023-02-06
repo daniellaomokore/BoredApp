@@ -1,3 +1,5 @@
+import json
+
 import requests
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
@@ -10,9 +12,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:{PASSWORD}@localho
     PASSWORD=DATABASEPASSWORD, DatabaseName=DATABASENAME)
 database = SQLAlchemy(app)
 
-from londonweatherguess import routes
-
-
 
 def connect_to_api(url):
     response = requests.get(url)
@@ -21,3 +20,9 @@ def connect_to_api(url):
         dataResponse)  # deserializing - turns json string into python dictionary that can be now accessed
 
     return connection
+
+
+from londonweatherguess import routes
+
+
+

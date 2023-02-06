@@ -1,11 +1,15 @@
-from flask import request, flash, session, render_template, redirect
-from werkzeug.security import generate_password_hash
-
-from londonweatherguess.forms import temperatureGuess
-from londonweatherguess import app, connect_to_api
-from londonweatherguess.boredAppFunctions import saveResultToDatabase, check_if_temps_match, getUserAttemptNumber, \
-    get_random_row
+from flask import request, flash, session, render_template, redirect, url_for
+from sqlalchemy import or_
+from werkzeug.security import generate_password_hash, check_password_hash
+from . import app, connect_to_api, database
+from londonweatherguess.boredAppFunctions import is_user_logged_in, get_user_id, get_user_firstname, \
+    display_the_activity, check_if_activity_is_in_favourites
 import re
+from londonweatherguess.models import TheUsers, Favourites
+from londonweatherguess.forms import SignUpForm, LogInForm, ForgotPassword
+
+
+
 APIurl = "http://www.boredapi.com/api/activity"
 
 
@@ -16,7 +20,7 @@ def signup():
         return redirect(url_for("user"))
     else:
         firstname = lastname = email = dateofbirth = city = username = password = None
-        form = signUpForm()
+        form = SignUpForm()
 
         # if a POST request was made from the signup page
         if request.method == "POST":
@@ -42,14 +46,14 @@ def signup():
 
                 # Check if there's a user in the database with this username/email already
                 # this returns the user row with this email/username or None if it doesn't exist
-                user_exists = the_users.query.filter(
-                    or_(the_users.Email == email, the_users.Username == username)).first()
+                user_exists = TheUsers.query.filter(
+                    or_(TheUsers.Email == email, TheUsers.Username == username)).first()
 
                 if user_exists:
                     flash("A User already exists with this email/username.", "error")
                 else:
                     # save user into database
-                    new_user = the_users(FirstName=firstname, LastName=lastname, Email=email, DOB=dateofbirth,
+                    new_user = TheUsers(FirstName=firstname, LastName=lastname, Email=email, DOB=dateofbirth,
                                          City=city,
                                          Username=username, Password=password)  # hash password
                     database.session.add(new_user)
@@ -68,7 +72,7 @@ def signup():
 def login():
     if is_user_logged_in() is False:
         emailOrUsername = password = None
-        form = logInForm()
+        form = LogInForm()
 
         # if a POST request was made from the signup page
         if request.method == "POST":
@@ -85,10 +89,10 @@ def login():
                 # check if a username or email was entered
                 if "@" in emailOrUsername:
                     session['Email'] = emailOrUsername  # saves the users email into the session
-                    user = database.session.query(the_users).filter_by(Email=emailOrUsername).first()
+                    user = database.session.query(TheUsers).filter_by(Email=emailOrUsername).first()
                 else:
                     session['Username'] = emailOrUsername  # saves the users email into the session
-                    user = database.session.query(the_users).filter_by(Username=emailOrUsername).first()
+                    user = database.session.query(TheUsers).filter_by(Username=emailOrUsername).first()
 
                 # if a user exists in the database with this username/email
                 if user:
@@ -111,7 +115,7 @@ def login():
 @app.route("/forgotpassword", methods=["POST", "GET"])
 def forgotpassword():
     emailOrUsername = None
-    form = forgotPassword()
+    form = ForgotPassword()
 
     # if a POST request was made from the signup page
     if request.method == "POST":
@@ -136,8 +140,8 @@ def home():
 def view_favourites():
     if is_user_logged_in() is True:
         users_favourites = (
-            database.session.query(favourites.activity, favourites.participants, favourites.type, favourites.price)
-            .filter(favourites.UserID == session["UserID"])
+            database.session.query(Favourites.activity, Favourites.participants, Favourites.type, Favourites.price)
+            .filter(Favourites.UserID == session["UserID"])
             .all())
         return render_template("favourites.html", users_favourites=users_favourites)
     else:
@@ -333,7 +337,7 @@ def saveActivity():
             activity_type = activity['type']
 
             # Run query to save activity info
-            add_activity = favourites(activityID=activityID, UserID=UserID, activity=activity_name,
+            add_activity = Favourites(activityID=activityID, UserID=UserID, activity=activity_name,
                                       participants=participant_number, price=price,
                                       type=activity_type)
             database.session.add(add_activity)

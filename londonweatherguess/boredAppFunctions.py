@@ -1,10 +1,11 @@
-import csv
-import random
-from datetime import datetime
-from sqlalchemy import func
-from londonweatherguess import database
-from londonweatherguess.models import TheUsers,Favourites
 
+from flask import session
+from sqlalchemy import and_
+from londonweatherguess import database, connect_to_api
+from londonweatherguess.models import TheUsers, Favourites
+
+
+APIurl = "http://www.boredapi.com/api/activity"
 
 
 def display_the_activity(activityID):
@@ -35,8 +36,8 @@ def display_the_activity(activityID):
 
 
 def check_if_activity_is_in_favourites(activityID, UserID):
-    favouritesExists = favourites.query.filter(
-        and_(favourites.activityID == activityID, favourites.UserID == UserID)).first()
+    favouritesExists = Favourites.query.filter(
+        and_(Favourites.activityID == activityID, Favourites.UserID == UserID)).first()
 
     if favouritesExists:  # if True
         return True
@@ -49,11 +50,11 @@ def get_user_id():
     # query user id where email/username is
     if 'Email' in session:
         # query the user by their email
-        current_user = database.session.query(the_users).filter_by(Email="{}".format(session['Email'])).first()
+        current_user = database.session.query(TheUsers).filter_by(Email="{}".format(session['Email'])).first()
 
     elif 'Username' in session:
         # query the user by their username
-        current_user = database.session.query(the_users).filter_by(Username="{}".format(session['Username'])).first()
+        current_user = database.session.query(TheUsers).filter_by(Username="{}".format(session['Username'])).first()
 
     UserID = current_user.UserID  # select their UserID column
 
@@ -64,11 +65,11 @@ def get_user_firstname():
     # query user firstname where email/username is
     if 'Email' in session:
         # query the user by their email
-        current_user = database.session.query(the_users).filter_by(Email="{}".format(session['Email'])).first()
+        current_user = database.session.query(TheUsers).filter_by(Email="{}".format(session['Email'])).first()
 
     elif 'Username' in session:
         # query the user by their username
-        current_user = database.session.query(the_users).filter_by(Username="{}".format(session['Username'])).first()
+        current_user = database.session.query(TheUsers).filter_by(Username="{}".format(session['Username'])).first()
 
     FirstName = current_user.FirstName  # select their FirstName column
 

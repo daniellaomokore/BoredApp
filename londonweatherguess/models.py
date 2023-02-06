@@ -1,4 +1,6 @@
 import sqlalchemy
+from londonweatherguess import database
+
 if __name__ == '__main__':
     from config import DATABASEPASSWORD, DATABASENAME, HOST, USER
 else:
