@@ -2,7 +2,7 @@ import os
 
 # Mysqlworkbench
 
-DATABASENAME = os.environ.get('DATABASENAME')
+DATABASENAME = "boredapp_users"
 USER = os.environ.get('USER')
 DATABASEPASSWORD = os.environ.get('DATABASEPASSWORD') # THIS IS YOUR MYSQLWORKBENCH PASSWORD
 HOST = os.environ.get('HOST')
