@@ -2,11 +2,11 @@ from flask import request, flash, session, render_template, redirect, url_for
 from sqlalchemy import or_
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import app, connect_to_api, database
-from londonweatherguess.boredAppFunctions import is_user_logged_in, get_user_id, get_user_firstname, \
+from boredapp.boredAppFunctions import is_user_logged_in, get_user_id, get_user_firstname, \
     display_the_activity, check_if_activity_is_in_favourites
 import re
-from londonweatherguess.models import TheUsers, Favourites
-from londonweatherguess.forms import SignUpForm, LogInForm, ForgotPassword
+from boredapp.models import TheUsers, Favourites
+from boredapp.forms import SignUpForm, LogInForm, ForgotPassword
 
 
 

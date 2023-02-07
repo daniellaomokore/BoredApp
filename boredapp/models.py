@@ -1,10 +1,10 @@
 import sqlalchemy
-from londonweatherguess import database
+from boredapp import database
 
 if __name__ == '__main__':
     from config import DATABASEPASSWORD, DATABASENAME, HOST, USER
 else:
-    from londonweatherguess.config import DATABASEPASSWORD, DATABASENAME, USER, HOST
+    from boredapp.config import DATABASEPASSWORD, DATABASENAME, USER, HOST
 from sqlalchemy import create_engine, orm
 
 Base = sqlalchemy.orm.declarative_base()

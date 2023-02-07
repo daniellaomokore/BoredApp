@@ -1,9 +1,7 @@
-
 from flask import session
 from sqlalchemy import and_
-from londonweatherguess import database, connect_to_api
-from londonweatherguess.models import TheUsers, Favourites
-
+from boredapp import database, connect_to_api
+from boredapp.models import TheUsers, Favourites
 
 APIurl = "http://www.boredapi.com/api/activity"
 
@@ -34,10 +32,8 @@ def display_the_activity(activityID):
         activity_name, price, activity_type, participant_number, "" if participant_number == 1 else "s"), link_str
 
 
-
 def check_if_activity_is_in_favourites(activityID, UserID):
-    favouritesExists = Favourites.query.filter(
-        and_(Favourites.activityID == activityID, Favourites.UserID == UserID)).first()
+    favouritesExists = database.session.query(Favourites).filter_by(activityID=activityID, UserID=UserID).first()
 
     if favouritesExists:  # if True
         return True
@@ -74,7 +70,6 @@ def get_user_firstname():
     FirstName = current_user.FirstName  # select their FirstName column
 
     return FirstName.capitalize()
-
 
 
 def is_user_logged_in():
