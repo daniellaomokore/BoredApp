@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block title %}User{% endblock %}
+
+{% block content %}
+     {% with messages = get_flashed_messages(with_categories=true) %}
+     {% if messages %}
+         {% for category,message in messages %}
+         {% if category == "success" %}
+             <div class="alert alert-success mb-3 alert-dismissible fade show" role="alert" id="alert-message">
+                 {{ message }}
+             </div>
+         {% endif %}
+
+         {% if category == "error" %}
+             <div class="alert alert-danger mb-3 alert-dismissible fade show" role="alert" id="alert-message">
+                 {{ message }}
+             </div>
+         {% endif %}
+
+           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+           </button>
+
+         <script>
+         setTimeout(() => {
+             document.getElementById("alert-message").style.opacity = "0";
+         }, 1700);
+         </script>
+
+         {% endfor %}
+
+     {% endif%}
+     {% endwith %}
+
+<h1> Welcome {{ session["FirstName"] }}, to your BoredApp </h1>
+
+<h2>Choose how you would like to generate an activity:</h2>
+
+</br>
+
+<form action="{{ url_for('randomActivity') }}" method="POST">
+        <input type="submit" name="next" value="Random Activity">
+</form>
+
+</br>
+
+<form action="{{ url_for('participantNumber') }}" method="POST">
+        <input type="text" name="participants" placeholder="No. of participants [1-5]or [8]:"><input type="submit" name="next" value="Activity based on participant number"><br>
+</form>
+
+</br>
+
+<form action="{{ url_for('budgetRange') }}" method="POST">
+          <input type="text" name="£ minimumBudget" placeholder="Minimum Budget" >
+          <input type="text" name="£ maximumBudget" placeholder="Maximum Budget"  >
+          <input type="submit" name="next" value="Activity based on budget"><br>
+</form>
+
+
+</br>
+
+<form action="{{ url_for('activityType') }}" method="POST">
+        <input type="text" name="activityType" placeholder="Type of activity:"><input type="submit" name="next" value="Activity based on type"><br>
+        <h6>Types: education, recreational, social, diy, charity, cooking, relaxation, music, busywork</h6>
+</form>
+
+</br>
+
+<form action="{{ url_for('activityLinked') }}" method="POST">
+        <input type="submit" name="activityLinked" value="Activity With A Link">
+</form>
+
+</br>
+
+
+
+
+
+<!-- Improve this with an else statement so that when a user inserts nothing the random doesn't just automatically run -->
+{% if clicked  %}
+
+       <h2>Activity</h2>
+       <p class = "activity">{{ activityInfo }}. <a target="_blank" href="{{ link_str }}">{{ link_str }}</a></p>
+
+{% endif %}
+
+<form action="{{ url_for('saveActivity') }}" method="POST">
+       <input type="submit" name="next" value="saveActivity"><br>
+</form>
+
+</br>
+
+
+<!--
+ <div class="alert alert-info alert-dismissible fade show" role="alert">
+         {{ message }}
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+         <span aria-hidden="true">&times;</span></button>
+         </div>
+-->
+
+
+
+
+
+{% endblock %}
