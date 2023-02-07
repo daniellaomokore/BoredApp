@@ -1,39 +1,20 @@
 # BoredApp
  
 
-I'm Currently developing the 'BoredApp' using Python, RESTApi , MySQL, SQL Alchemy, Flask, HTML & CSS.
+🚀<b>Usage</b>:
 
-API: https://www.boredapi.com/
+<i>The BoredApp assists users in generating a chosen activity to take part in based on the users budget,number of participants, activities with links , a specific type of activity or choose an activity at random.
+           
+                        
 
-NEW LEARNS:
+✨<b>How to Run:</b>
 
--sqlalchemy 
-- flask forms instead of html forms for validation, inputting images, documents etc, csrf token
-- werkzeug
-- 'permanent_session_lifetime' for flask app
-- how to use python code in html {{% %}}, {{}}
-- bootstrap & customizing flashes/alert messages based on message type and colour and fading them away over time
+* Install the dependencies by running `pip install -r requirements.txt` in the terminal or command prompt on your system.
 
-THINGS I DID TO OPTIMIZE THE APP/MAKE IT LESS EXPENSIVE/ FASTER/ SAFER
+* Create the database by opening the 'Database' directory in the 'londonweatherguess' directory , copy the content  within the 'createDatabase.sql' file and run it into your MYSQL Workbench or MYSQL CLI to create the database . 
 
-- i was going to use the exists query for login and signup but its expensive as it queries the db twice so instead i use just a single filter query to see if a row is returned or if none is returned.
-- using sessions to store user email/username and id when they log in instead of repeatedly querying the database as Trips to database are slower than accessing sessions
-- Hashing passwords using werkzeug
-- wtforms = easy inbuilt validation for login and signup forms e.g email validators so i'm not reinventing the wheel + csrf token
-- sqlalchemy to query the database instead of using raw sql to prevent SQL injection attacks
+* Run the 'models.py' file to create your database table.
 
-Libraries Used:
-- pymysql
-- Flask_WTF
-- Flask
-- datetime
-- flask_sqlalchemy
-- wtforms
-- werkzeug
-- requests
-- regex
+* set up your environmental variables in a '.env' file in the root. With variables for USER = "[your MYSQL user]", DATABASEPASSWORD = "[your MYSQL password]" ,HOST = "[your MYSQL host]" and SECRET_KEY = "[your secret key]"
 
-Exception/Error Handling
-- When trying to access pages whilst not logged in
-- for invalid/incorrect input or out of bounds input
-- regex for user password to be secure
+* Run `run --app run --debug run --reload` in the terminal of the root directory of the project or run the 'run.py' file directly and then click the link: http://127.0.0.1:5000.
