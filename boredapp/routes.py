@@ -1,5 +1,4 @@
 from flask import request, flash, session, render_template, redirect, url_for
-from sqlalchemy import or_
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import app, connect_to_api, database
 from boredapp.boredAppFunctions import is_user_logged_in, get_user_id, get_user_firstname, \
@@ -46,8 +45,7 @@ def signup():
 
                 # Check if there's a user in the database with this username/email already
                 # this returns the user row with this email/username or None if it doesn't exist
-                user_exists = TheUsers.query.filter(
-                    or_(TheUsers.Email == email, TheUsers.Username == username)).first()
+                user_exists = database.session.query(TheUsers).filter((TheUsers.Email == email) | (TheUsers.Username == username)).first()
 
                 if user_exists:
                     flash("A User already exists with this email/username.", "error")

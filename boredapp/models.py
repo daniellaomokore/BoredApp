@@ -1,6 +1,7 @@
 import sqlalchemy
 import mysql.connector
 from boredapp import database
+from flask_sqlalchemy import SQLAlchemy
 
 if __name__ == '__main__':
     from config import DATABASEPASSWORD, DATABASENAME, HOST, USER
