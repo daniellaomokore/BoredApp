@@ -55,10 +55,8 @@
 
 
 
-
-
 ✨<b>How to Test:</b>
 
 * Run `python test.py` in the terminal of the root directory of the project or run the 'test.py' file directly.
 
-* Code Structure reference: https://youtu.be/44PvX0Yv368
+ Code Structure reference: https://youtu.be/44PvX0Yv368
