@@ -1,3 +1,5 @@
+--The Raw SQL Database--
+
 
 -- Part 1 Create the Database
 CREATE DATABASE BoredApp_users;
