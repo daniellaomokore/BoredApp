@@ -1,0 +1,72 @@
+body {
+    background-color: rgb(186, 216, 247);
+    font-family: 'Concert One', cursive;
+}
+
+li {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px;
+}
+
+a, a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.generator-buttons {
+    display: inline-block;
+    background-color: #1c79bc;
+    color: whitesmoke;
+    padding: 5px 6px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.generator-buttons:hover {
+    background-color: rgb(7, 90, 150);
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 30px;
+}
+
+.top-row {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.bottom-row {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    width: 100%;
+    padding-top: 30px;
+}
+
+
+.bottom-row p {
+    margin: 5px 0;
+    width:75%;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+.displayed-activity-container {
+    text-align:center;
+    padding-top:37px;
+}
+
+

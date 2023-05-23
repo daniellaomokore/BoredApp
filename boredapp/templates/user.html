@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}User{% endblock %}
+
+{% block content %}
+     {% with messages = get_flashed_messages(with_categories=true) %}
+     {% if messages %}
+         {% for category,message in messages %}
+         {% if category == "success" %}
+             <span class="alert alert-success mb-3 fade show" role="alert" id="alert-message">
+                 {{ message }}
+             </span>
+         {% endif %}
+
+         {% if category == "error" %}
+             <span class="alert alert-danger mb-3 fade show" role="alert" id="alert-message">
+                 {{ message }}
+             </span>
+         {% endif %}
+
+
+         {% endfor %}
+
+     {% endif%}
+     {% endwith %}
+
+<h1> Welcome {{ session["FirstName"] }}, to your BoredApp </h1>
+
+<h2>Choose how you would like to generate an activity:</h2>
+
+<div class="button-container">
+    <div class="top-row">
+        <form action="{{ url_for('random_activity') }}" method="POST">
+            <input type="submit" name="next" value="Random Activity" class="generator-buttons">
+        </form>
+
+        <form action="{{ url_for('free_activity') }}" method="POST">
+            <input type="submit" name="next" value="Free Activity" class="generator-buttons">
+        </form>
+
+        <form action="{{ url_for('activity_that_costs_money') }}" method="POST">
+            <input type="submit" name="next" value="An activity that may cost money" class="generator-buttons">
+        </form>
+
+        <form action="{{ url_for('activity_linked') }}" method="POST">
+            <input type="submit" name="activity_linked" value="Activity With A Link" class="generator-buttons">
+        </form>
+    </div>
+
+    <div class="bottom-row">
+        <form action="{{ url_for('activity_type') }}" method="POST">
+            <input type="text" name="activity_type" placeholder="Type of activity:">
+            <input type="submit" name="next" value="Activity based on type" class="generator-buttons">
+            <p>Activity types: Education, recreational, social, diy, charity, cooking, relaxation, music, busywork</p>
+        </form>
+
+        <form action="{{ url_for('participant_number') }}" method="POST">
+            <input type="text" name="participants" placeholder="No. of participants [1-5]or [8]:">
+            <input type="submit" name="next" value="Activity based on participant number" class="generator-buttons">
+            <br>
+        </form>
+    </div>
+</div>
+
+
+
+<div class="displayed-activity-container">
+
+<!-- If an activity has been generated... -->
+{% if clicked  %}
+
+       <h2>Activity</h2>
+       <h5 class = "activity">{{ activityInfo }}. <a target="_blank" href="{{ link_str }}">{{ link_str }}</a></h5>
+
+       <form action="{{ url_for('save_activity') }}" method="POST">
+            <input type="submit" name="next" value="Save Activity"><br>
+       </form>
+{% endif %}
+
+</div>
+
+
+
+
+{% endblock %}

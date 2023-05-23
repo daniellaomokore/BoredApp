@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}Favourites{% endblock %}
+{% block content %}
+<h1>Favourites Page</h1>
+
+     {% with messages = get_flashed_messages(with_categories=true) %}
+     {% if messages %}
+         {% for category,message in messages %}
+         {% if category == "success" %}
+             <div class="alert alert-success mb-3 fade show" role="alert" id="alert-message">
+                 {{ message }}
+             </div>
+         {% endif %}
+
+         {% if category == "error" %}
+             <div class="alert alert-danger mb-3 fade show" role="alert" id="alert-message">
+                 {{ message }}
+             </div>
+         {% endif %}
+         {% endfor %}
+
+     {% endif%}
+     {% endwith %}
+
+
+<h1>{{ session["FirstName"] }}'s favourite activities:</h1>
+
+<form action="{{ url_for('view_favourites_by_activity_type') }}" method="GET">
+    <label for="activity_type">Filter By Type Of Activity:</label>
+    <select name="activity_type" id="activity_type">
+        <option value="{{ activity_type }}" hidden selected>{{ activity_type }}</option>
+        <option value="All" >All</option>
+        <option value="Education" >Education</option>
+        <option value="Recreational">Recreational</option>
+        <option value="Social">Social</option>
+        <option value="Diy">Diy</option>
+        <option value="Charity">Charity</option>
+        <option value="Cooking">Cooking</option>
+        <option value="Relaxation">Relaxation</option>
+        <option value="Music">Music</option>
+        <option value="Busywork">Busywork</option>
+    </select>
+    <button type="submit" class="generator-buttons">Filter</button>
+</form>
+
+
+
+
+<ul>
+{% for name, participants, activity_type, link , activity_id in users_favourites %}
+    <li>
+        {{ name }} - no. of participants: {{ participants }} - {{ activity_type }} activity
+        {% if link %}
+            - {{ link }}
+        {% endif %}
+        <form action="{{ url_for('delete_favourite', activity_id=activity_id) }}" method="POST">
+            <button type="submit" class="generator-buttons">Delete</button>
+        </form>
+    </li>
+{% endfor %}
+</ul>
+{% endblock %}
+
+
+<!-- hyperlinked link -->
+<!--
+<ul>
+{% for name, participants, activity_type, link , activity_id in users_favourites %}
+    <li>
+        {{ name }} - no. of participants: {{ participants }} - {{ activity_type }} activity
+        {% if link %}
+            - <a href="{{ link }}">{{ link }}</a>
+        {% endif %}
+        <form action="{{ url_for('delete_favourite', activity_id=activity_id) }}" method="POST">
+            <button type="submit" class="generator-buttons">Delete</button>
+        </form>
+    </li>
+{% endfor %}
+</ul>
+
+
+-->
+

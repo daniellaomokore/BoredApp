@@ -1,0 +1,49 @@
+{% extends "base1.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+     {% with messages = get_flashed_messages(with_categories=true) %}
+     {% if messages %}
+         {% for category,message in messages %}
+         {% if category == "success" %}
+             <div class="alert alert-success mb-3  fade show" role="alert" id="alert-message" >
+                 <p>{{ message }}</p>
+             </div>
+         {% endif %}
+
+         {% if category == "error" %}
+             <div class="alert alert-danger mb-3  fade show" role="alert" id="alert-message" >
+                 <p>{{ message }}</p>
+             </div>
+         {% endif %}
+
+         {% endfor %}
+
+     {% endif%}
+     {% endwith %}
+
+
+<a href="{{ url_for('home') }}"><h1>The BoredApp</h1></a>
+<h2> Log into your Account</h2>
+
+
+<!-- WTF-Flask FORM  -->
+<form method="POST">
+    {{ form.hidden_tag() }}  <!-- This will create our csrf token-->
+    <p>{{ form.email_or_username(placeholder="Enter Email or Username") }}</p>
+    <p>{{ form.password(placeholder="Enter Password") }}</p>
+    {{ form.submit() }}
+</form>
+
+<br/>
+<a href="{{ url_for('google_login') }}">
+    <img src="{{ url_for('static', filename='images/google_signin.png') }}" alt="Sign in with Google">
+</a>
+
+<p>Don't have an Account?<a href="{{url_for('sign_up')}}"> Sign up</a></p>
+<p>Forgot Password?<a href="{{url_for('forgot_password')}}"> Forgot Password</a></p>
+
+
+{% endblock %}

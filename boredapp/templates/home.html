@@ -1,0 +1,41 @@
+{% extends "base1.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+     {% with messages = get_flashed_messages(with_categories=true) %}
+     {% if messages %}
+         {% for category,message in messages %}
+         {% if category == "success" %}
+             <div class="alert alert-success mb-3  fade show" role="alert" id="alert-message">
+                 {{ message }}
+             </div>
+         {% endif %}
+
+         {% if category == "error" %}
+             <div class="alert alert-danger mb-3  fade show" role="alert" id="alert-message">
+                 {{ message }}
+             </div>
+         {% endif %}
+
+
+         {% endfor %}
+
+     {% endif%}
+     {% endwith %}
+
+<body>
+<h1>The BoredApp</h1>
+    <image src="{{ url_for('static', filename='images/image.png')}}"></image>
+    <h2><a href="{{url_for('login')}}">Log in</a></h2>
+    <a href="{{ url_for('google_login') }}">
+    <img src="{{ url_for('static', filename='images/google_signin.png') }}" alt="Sign in with Google">
+</a>
+    <h2>OR</h2>
+    <h2><a href="{{url_for('sign_up')}}">Sign up</a></h2>
+
+
+</body>
+
+{% endblock %}
