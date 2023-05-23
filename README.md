@@ -5,7 +5,8 @@
 
 <i>The BoredApp assists users in generating a chosen activity to take part in based on number of participants, free & paid activities, paid activities with associated links, a specific type of activity or choose an activity at random.
             
-
+Video Demo Link:https://clipchamp.com/watch/ZVdVr6OEF1Z
+ 
 <b>My Favourite Features:</b>
 
 - 3rd Party Google log in and sign up for users.
