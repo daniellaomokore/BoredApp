@@ -138,7 +138,6 @@ def send_user_login_verification_code():
     message = Message(subject=subject, sender=("BoredApp", DUMMYEMAIL), recipients=[user_email], reply_to=None)
     message.body = body
 
-    mail.send(message)
 
     try:
         mail.send(message)
