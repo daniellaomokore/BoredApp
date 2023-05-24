@@ -15,7 +15,7 @@ Video Demo Link: https://clipchamp.com/watch/ZVdVr6OEF1Z
 
 - 6-digit login verification code sent to users emails.
 
-- Use of SQL Indexes in my relational MYSQL database to speed up database queries and make data retrieval more efficient.
+- Use of SQL Indexes in my relational Postgres database to speed up database queries and make data retrieval more efficient.
 
 - Use of the SQLAlchemy ORM instead of using raw SQL queries -> to prevent sql injection attacks.
 
@@ -25,7 +25,7 @@ Video Demo Link: https://clipchamp.com/watch/ZVdVr6OEF1Z
 
 - Use of API and http requests
 
-- Use of Relational Database -> MySQL
+- Use of Relational Database -> Postgres
 
 - Unit testing & good test coverage.
 
@@ -44,12 +44,15 @@ Video Demo Link: https://clipchamp.com/watch/ZVdVr6OEF1Z
 * Run the 'models.py' file once to create your database and it's tables.
 
 * set up your environmental variables in a '.env' file in the root. With variables for :
-  * USER = "[your MYSQL user]"
+  * USER = "[your Postgres user]"
   * DATABASEPASSWORD = "[your MYSQL password]"  
-  * HOST = "[your MYSQL host]" 
+  * DATABASEUSERNAME="[your Postgres username ]"
+  * PORT ="[your Postgres port number]"
+  * HOST = "[your Postgres host]" 
   * SECRET_KEY = "[your secret key]"
   * MYEMAIL="[your email]"
   * MYEMAILPASSWORD="[your email password]"
+ 
 
 * Run `python run.py` in the terminal of the root directory of the project or run the 'run.py' file directly and then click the link: http://127.0.0.1:5000.
 
