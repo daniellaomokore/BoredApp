@@ -195,9 +195,8 @@ def login():
 
                     session['Email'] = user.Email  # saves the users email into the session
 
-                    # flash("Log in Successful!", "success")
-                    send_user_login_verification_code()
-                    return redirect(url_for("verify_login"))
+                    if send_user_login_verification_code():
+                        return redirect(url_for("verify_login"))
                 else:
                     flash("Log in Unsuccessful, Please try again!", "error")
 
