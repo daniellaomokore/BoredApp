@@ -140,8 +140,13 @@ def send_user_login_verification_code():
 
     mail.send(message)
 
-    flash("Verification code has been sent to your email.", "info")
-    return
+    try:
+        mail.send(message)
+        flash("Verification code has been sent to your email.", "success")
+        return True
+    except Exception as e:
+        flash("Failed to send verification code. Please try again later.", "error")
+        return False
 
 
 def check_if_strong_password(password):
