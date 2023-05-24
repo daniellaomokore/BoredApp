@@ -1,11 +1,11 @@
 import sqlalchemy
-import mysql.connector
+import psycopg2
 from boredapp import database
 
 if __name__ == '__main__':
     from config import DATABASEPASSWORD, DATABASENAME, HOST, USER
 else:
-    from boredapp.config import DATABASEPASSWORD, DATABASENAME, USER, HOST
+    from boredapp.config import DATABASEPASSWORD, DATABASENAME, USER, HOST, PORT
 from sqlalchemy import create_engine, orm, Index
 
 Base = sqlalchemy.orm.declarative_base()
@@ -16,8 +16,10 @@ def create_database():
     """
     This function creates a new MYSQL database.
     """
-    # Establish a connection to the MySQL server
-    cnx = mysql.connector.connect(user=USER, password=DATABASEPASSWORD, host=HOST)
+
+    # Establish a connection to the PostgreSQL server
+    cnx = psycopg2.connect(user=USER, password=DATABASEPASSWORD, host=HOST, port=PORT)
+
 
     # Create a cursor object to execute SQL commands
     cursor = cnx.cursor()
@@ -99,5 +101,5 @@ def create_database_table():
 
 
 if __name__ == "__main__":
-    create_database()
+    create_database()l
     create_database_table()
