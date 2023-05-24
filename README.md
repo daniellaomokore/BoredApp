@@ -7,6 +7,8 @@
             
 Video Demo Link: https://clipchamp.com/watch/ZVdVr6OEF1Z
  
+This version uses the MySQL database, there is an alternate 'postgres' branch compatible with Postgres.
+
 <b>My Favourite Features:</b>
 
 - 3rd Party Google log in and sign up for users.
