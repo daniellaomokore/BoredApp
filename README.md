@@ -26,7 +26,7 @@ This version uses the Postgres database, there is an alternate 'main' branch com
 
 - Clean & modular code, easy to understand & well commented code.
 
-- Use of API and http requests
+- Use of REST API and http requests
 
 - Use of Relational Database -> Postgres
 
