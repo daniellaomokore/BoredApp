@@ -77,11 +77,11 @@ def callback():
     session["Email"] = id_info.get("email").lower()
 
     # save the user's profile information to the database
-    user_exists = database.session.query(TheUsers).filter(TheUsers.Email == session["Email"]).first()
+    user_exists = database.session.query(TheUsers).filter(TheUsers.Email == session.get("Email")).first()
 
     if user_exists == None:  # if the user isn't already in the database
         # create a new user object
-        new_user = TheUsers(FirstName=session["FirstName"], LastName=session["LastName"], Email=session["Email"])
+        new_user = TheUsers(FirstName=session.get("FirstName"), LastName=session.get("LastName"), Email=session.get("Email"))
         # add the user to the database
         database.session.add(new_user)
         database.session.commit()
