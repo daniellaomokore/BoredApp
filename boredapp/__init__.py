@@ -12,6 +12,7 @@ from boredapp.config import (
     GOOGLE_CLIENT_ID,
     SECRET_KEY,
     MYEMAILPASSWORD,
+    DATABASEUSERNAME,
     MYEMAIL,
     USER,
 )
@@ -32,8 +33,10 @@ bcrypt = Bcrypt(app)   # Initialize the Bcrypt extension with the Flask app
 
 # Set the app's configs
 app.config["SECRET_KEY"] = f"{SECRET_KEY}"  # secret key for the WTForm forms you create
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:{PASSWORD}@localhost/{DATABASENAME}".format(
-    PASSWORD=DATABASEPASSWORD, DATABASENAME=DATABASENAME)
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql+psycopg2://{DATABASEUSERNAME}:{PASSWORD}@localhost/{DATABASENAME}".format(
+    PASSWORD=DATABASEPASSWORD, DATABASENAME=DATABASENAME,DATABASEUSERNAME=DATABASEUSERNAME)
+
+
 
 # Set the app's session lifetime to 30 minutes
 app.permanent_session_lifetime = timedelta(minutes=30)
