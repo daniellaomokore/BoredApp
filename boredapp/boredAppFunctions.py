@@ -11,7 +11,7 @@ api_url = "http://www.boredapi.com/api/activity"
 
 
 # note: Since we've created an index for the 'email' column, 'username' column and a double column index for the 'activityID' and 'UserID' Column,
-# MySQL will automatically use the indexes to optimize our following queries. We don't need to specify the index
+# Postgres will automatically use the indexes to optimize our following queries. We don't need to specify the index
 # in the query since SQLAlchemy will handle it for us.
 # Using the indexes will speed up the search.
 
