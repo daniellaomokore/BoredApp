@@ -14,7 +14,6 @@ from boredapp.config import (
     MYEMAILPASSWORD,
     DATABASEUSERNAME,
     MYEMAIL,
-    USER,
     PORT,
 )
 

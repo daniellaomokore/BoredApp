@@ -14,12 +14,11 @@ load_dotenv()
 # environmental variables stored
 
 DATABASENAME = "boredapp_users"
-USER = os.environ.get("USER")
-DATABASEPASSWORD = os.environ.get("DATABASEPASSWORD")  # THIS IS YOUR MYSQLWORKBENCH PASSWORD
-HOST = os.environ.get("HOST")
-GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID")
 DATABASEUSERNAME = os.environ.get("DATABASEUSERNAME")
+DATABASEPASSWORD = os.environ.get("DATABASEPASSWORD")  # THIS IS YOUR POSTGRES PASSWORD
+HOST = os.environ.get("HOST")
 PORT = os.environ.get("PORT")
+GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID")
 
 
 

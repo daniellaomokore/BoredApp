@@ -1,12 +1,11 @@
 import psycopg2
 from sqlalchemy import Column, Integer, String, ForeignKey, Index
-from sqlalchemy.orm import relationship
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship, declarative_base
 
 if __name__ == '__main__':
-    from config import DATABASEPASSWORD, DATABASENAME, HOST, USER, PORT
+    from config import DATABASEPASSWORD, DATABASENAME, HOST, PORT, DATABASEUSERNAME
 else:
-    from boredapp.config import DATABASEPASSWORD, DATABASENAME, USER, HOST, PORT
+    from boredapp.config import DATABASEPASSWORD, DATABASENAME, HOST, PORT, DATABASEUSERNAME
 
 from sqlalchemy import create_engine
 
@@ -21,7 +20,9 @@ def create_database():
     """
 
     # Establish a connection to the PostgreSQL server
-    cnx = psycopg2.connect(user=USER, password=DATABASEPASSWORD, host=HOST, port=PORT)
+    cnx = psycopg2.connect(user=DATABASEUSERNAME, password=DATABASEPASSWORD, host=HOST, port=PORT)
+
+    cnx.autocommit = True
 
     # Create a cursor object to execute SQL commands
     cursor = cnx.cursor()
@@ -30,7 +31,7 @@ def create_database():
     cursor.execute(f"CREATE DATABASE {DATABASENAME}")
 
     # Commit the transaction to make the database creation permanent
-    cnx.commit()
+    #cnx.commit()
 
     # Close the cursor and the connection
     cursor.close()
@@ -47,14 +48,13 @@ class TheUsers(Base):
     Username = Column(String(200), index=True)
     Password = Column(String(200))
 
-
     def __init__(self, FirstName, LastName, Email, Username=None, Password=None):
         self.FirstName = FirstName
         self.LastName = LastName
         self.Email = Email
         self.Username = Username
         self.Password = Password
-        
+
     # Add the relationship attributes
     favourites = relationship('Favourites')
 
@@ -86,11 +86,11 @@ class Favourites(Base):
 
 
 engine = create_engine("postgresql+psycopg2://{user}:{password}@{host}:{port}/{databasename}".format(
-    user=USER,
+    user=DATABASEUSERNAME,
     password=DATABASEPASSWORD,
     host=HOST,
     port=PORT,
-    databasename=DATABASENAME
+    databasename=DATABASENAME,
 ))
 
 
