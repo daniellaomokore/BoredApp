@@ -39,27 +39,57 @@ This version uses the MySQL database, there is an alternate 'postgress' branch c
 - Darkmode/lightmode
 
 
-✨<b>How to Run:</b>
+## ✨<b>Installation</b>
+1. Clone the repository:
 
-* Install the dependencies by running `pip install -r requirements.txt` in the terminal or command prompt on your system.
+``` git clone https://github.com/daniellaomokore/BoredApp.git ```
 
-* Run the 'models.py' file once to create your database and it's tables.
+2. Change into the project directory:
 
-* set up your environmental variables in a '.env' file in the root. With variables for :
-  * USER = "[your MYSQL user]"
-  * DATABASEPASSWORD = "[your MYSQL password]"  
-  * HOST = "[your MYSQL host]" 
-  * SECRET_KEY = "[your secret key]"
-  * MYEMAIL="[your email]"
-  * MYEMAILPASSWORD="[your email password]"
+``` cd flask-app ```
 
-* Run `python run.py` in the terminal of the root directory of the project or run the 'run.py' file directly and then click the link: http://127.0.0.1:5000.
+3. Create a virtual environment:
 
+```python3 -m venv venv```
 
+4. Activate the virtual environment:
+- For Mac/Linux:
+  ```
+  source venv/bin/activate
+  ```
+- For Windows:
+  ```
+  venv\Scripts\activate
+  ```
+5. Install the required dependencies:
 
+pip install -r requirements.txt
+ 
 
-✨<b>How to Test:</b>
+6. Create a `.env` file in the project root directory.
 
-* Run `python test.py` in the terminal of the root directory of the project or run the 'test.py' file directly.
+7. Add the following configuration variables:
+  ``` USER = "[your MYSQL user]"
+  DATABASEPASSWORD = "[your MYSQL password]"  
+  HOST = "[your MYSQL host]" 
+  SECRET_KEY = "[your secret key]"
+  MYEMAIL="[your email]"
+  MYEMAILPASSWORD="[your email password]"
+ 
+  ```
+8. Run the models.py file to create the database.
+ 
+ ``` python models.py```
+ 
+9. Run the Flask development server in the root directory:
+ 
+ ```python run.py```
+ 
+10. Open your browser and navigate to `http://localhost:5000` to access the app.
+ 
+## ✨<b>How to Test:</b>
+
+1. Run the test file in the the root directory.
+ ```python test.py```
 
  Code Structure reference: https://youtu.be/44PvX0Yv368
