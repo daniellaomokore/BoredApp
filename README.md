@@ -54,13 +54,9 @@ This version uses the MySQL database, there is an alternate 'postgress' branch c
 
 4. Activate the virtual environment:
 - For Mac/Linux:
-  ```
-  source venv/bin/activate
-  ```
+  ```source venv/bin/activate```
 - For Windows:
-  ```
-  venv\Scripts\activate
-  ```
+  ```venv\Scripts\activate```
 5. Install the required dependencies:
 
 pip install -r requirements.txt
