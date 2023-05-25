@@ -77,7 +77,7 @@ def callback():
     session["Email"] = id_info.get("email").lower()
 
     # save the user's profile information to the database
-    user_exists = database.session.query(TheUsers).filter(TheUsers.Email == session.get("Email").first()
+    user_exists = database.session.query(TheUsers).filter(TheUsers.Email == session.get("Email")).first()
 
     if user_exists == None:  # if the user isn't already in the database
         # create a new user object

@@ -10,6 +10,7 @@ from sqlalchemy import create_engine, orm, Index
 
 Base = sqlalchemy.orm.declarative_base()
 
+
 # TO CREATE THE DATABASE
 # Note: I put this in a function to prevent cnx from running when i run the app even when i haven't ran the models file.
 def create_database():
@@ -47,11 +48,13 @@ class TheUsers(Base):
     UserID = database.Column(database.Integer, primary_key=True, autoincrement=True, nullable=False)
     FirstName = database.Column(database.String(65), nullable=False)
     LastName = database.Column(database.String(65), nullable=False)
-    Email = database.Column(database.String(65), nullable=False, unique=True, index=True)  # create index for Email column
+    Email = database.Column(database.String(65), nullable=False, unique=True,
+                            index=True)  # create index for Email column
     Username = database.Column(database.String(200), index=True)  # create index for Username column
     Password = database.Column(database.String(200))
 
-    def __init__(self, FirstName, LastName, Email, Username=None, Password=None): # Set Username & Password to Default None becuase if a user signs up with google account then those arguments aren't needed
+    def __init__(self, FirstName, LastName, Email, Username=None,
+                 Password=None):  # Set Username & Password to Default None becuase if a user signs up with google account then those arguments aren't needed
         self.FirstName = FirstName
         self.LastName = LastName
         self.Email = Email
@@ -98,6 +101,6 @@ def create_database_table():
     Base.metadata.create_all(engine)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     create_database()
     create_database_table()
