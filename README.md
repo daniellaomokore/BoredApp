@@ -1,7 +1,7 @@
 # BoredApp
  
 
-🚀<b>Usage</b>:
+## 🚀<b>Usage</b>:
 
 <i>The BoredApp assists users in generating a chosen activity to take part in based on number of participants, free & paid activities, paid activities with associated links, a specific type of activity or choose an activity at random.
             
@@ -9,7 +9,7 @@ Video Demo Link: https://clipchamp.com/watch/ZVdVr6OEF1Z
  
 This version uses the MySQL database, there is an alternate 'postgress' branch compatible with Postgres.
 
-<b>My Favourite Features:</b>
+## ✨<b>My Favourite Features:</b>
 
 - 3rd Party Google log in and sign up for users.
 
@@ -33,7 +33,7 @@ This version uses the MySQL database, there is an alternate 'postgress' branch c
 
 
 
-<b>Things to add:</b>
+## <b>Things to add:</b>
 
 - Dynamic front end design & more styling
 - Darkmode/lightmode
