@@ -76,7 +76,7 @@ This version uses the Postgres database, there is an alternate 'main' branch com
   DATABASEPASSWORD = "[your postgres password]" 
   
   ```
-8. Run the models.py at path `boredapp/models.py` file <b>directly</b> to create the database.
+8. Run the models.py file at path `boredapp/models.py` <b>directly</b> to create the database.
   
 9. Run the Flask development server in the root directory:
  
