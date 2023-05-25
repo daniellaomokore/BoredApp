@@ -59,7 +59,7 @@ This version uses the MySQL database, there is an alternate 'postgress' branch c
   ```venv\Scripts\activate```
 5. Install the required dependencies:
 
-pip install -r requirements.txt
+```pip install -r requirements.txt```
  
 
 6. Create a `.env` file in the project root directory.
