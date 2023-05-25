@@ -25,9 +25,9 @@ This version uses the MySQL database, there is an alternate 'postgress' branch c
 
 - Clean & modular code, easy to understand & well commented code.
 
-- Use of API and http requests
+- Use of API and http requests.
 
-- Use of Relational Database -> MySQL
+- Use of Relational Database -> MySQL.
 
 - Unit testing & good test coverage.
 
@@ -35,8 +35,8 @@ This version uses the MySQL database, there is an alternate 'postgress' branch c
 
 ## <b>Things to add:</b>
 
-- Dynamic front end design & more styling
-- Darkmode/lightmode
+- Dynamic front end design & more styling.
+- Darkmode/lightmode.
 
 
 ## ✨<b>Installation</b>
