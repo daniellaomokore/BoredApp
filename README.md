@@ -46,7 +46,7 @@ This version uses the MySQL database, there is an alternate 'postgress' branch c
 
 2. Change into the project directory:
 
-``` cd flask-app ```
+``` cd BoredApp ```
 
 3. Create a virtual environment:
 
