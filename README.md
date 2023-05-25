@@ -83,7 +83,7 @@ This version uses the MySQL database, there is an alternate 'postgress' branch c
  
 ## ✨<b>How to Test:</b>
 
-1. Run the test file in the the root directory.
+1. Run the test file in the root directory.
  ```python test.py```
 
  Code Structure reference: https://youtu.be/44PvX0Yv368
