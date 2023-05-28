@@ -26,6 +26,8 @@
      {% endwith %}
 
 <body>
+
+<div class="loginsignup">
 <h1>The BoredApp</h1>
     <image src="{{ url_for('static', filename='images/image.png')}}"></image>
     <h2><a href="{{url_for('login')}}">Log in</a></h2>
@@ -35,7 +37,7 @@
     <h2>OR</h2>
     <h2><a href="{{url_for('sign_up')}}">Sign up</a></h2>
 
-
+</div>
 </body>
 
 {% endblock %}

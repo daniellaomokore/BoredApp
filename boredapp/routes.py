@@ -274,7 +274,7 @@ def forgot_password():
     return render_template('forgotpassword.html', form=form)
 
 
-@app.route('/reset-password/<token>', methods=['GET', 'POST'])
+@app.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
     """
             This function resets a users password.
