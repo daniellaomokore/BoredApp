@@ -24,13 +24,13 @@
      {% endif%}
      {% endwith %}
 
-
-<a href="{{ url_for('home') }}"><h1>The BoredApp</h1></a>
+<div class="loginsignup">
+<a href="{{ url_for('home') }}"><h1 class="boredapptitle">The BoredApp</h1></a>
 <h2> Log into your Account</h2>
 
 
 <!-- WTF-Flask FORM  -->
-<form method="POST">
+<form  class ="loginsignupforgotform" method="POST">
     {{ form.hidden_tag() }}  <!-- This will create our csrf token-->
     <p>{{ form.email_or_username(placeholder="Enter Email or Username") }}</p>
     <p>{{ form.password(placeholder="Enter Password") }}</p>
@@ -45,5 +45,5 @@
 <p>Don't have an Account?<a href="{{url_for('sign_up')}}"> Sign up</a></p>
 <p>Forgot Password?<a href="{{url_for('forgot_password')}}"> Forgot Password</a></p>
 
-
+</div>
 {% endblock %}

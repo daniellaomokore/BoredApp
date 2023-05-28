@@ -3,6 +3,18 @@ body {
     font-family: 'Concert One', cursive;
 }
 
+.loginsignup{
+   text-align:center;
+}
+
+.boredapptitle{
+    padding: 30px;
+}
+
+.loginsignupforgotform{
+    padding-top: 30px;
+}
+
 li {
     list-style-type: none;
     display: flex;
@@ -37,40 +49,40 @@ a, a:hover {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: space-evenly;
     margin-top: 30px;
+    width: 100%;
 }
 
 .top-row {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: flex-start;
-    width: 100%;
+    display: inherit;
+    justify-content: inherit;
+    width: inherit;
     margin-top: 15px;
 }
 
 .bottom-row {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: flex-start;
-    width: 100%;
-    padding-top: 30px;
+    display: inherit;
+    justify-content: inherit;
+    width: inherit;
+    padding-top: 40px;
 }
 
 
-.bottom-row p {
-    margin: 5px 0;
-    width:75%;
-    font-size: 15px;
-    line-height: 1.4;
+.bottom-row p, {
+    width:65%;
+}
+
+.signupform {
+  max-width: 590px; /* Limits the width of the element to 590 pixels */
+  word-wrap: break-word; /* Wraps long words within the specified width */
+  margin: 0 auto; /* Centers the element horizontally */
+  text-align: center; /* Centers the text inside the element */
 }
 
 .displayed-activity-container {
     text-align:center;
-    padding-top:37px;
+    padding-top:25px;
 }
 
-
-.favouriteslist{
-    width: 70%;
-}
 
