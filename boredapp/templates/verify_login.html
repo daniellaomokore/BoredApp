@@ -26,7 +26,7 @@
 
 
 
-<h1> The BoredApp</h1>
+<h1 class="boredapptitle"> The BoredApp</h1>
 <h2> Enter your login verification code </h2>
 
 <!-- For the error message from the 'ResetPassword' flask form validation-->
@@ -45,7 +45,7 @@
 <!-- WTF-Flask FORM -->
 <br>
 
-<form method="POST">
+<form class ="loginsignupforgotform" method="POST">
     {{ form.hidden_tag() }}  <!-- This will create our csrf token-->
     <p>{{ form.user_verification_code(placeholder="Enter Code") }}</p>
     {{ form.submit() }}
