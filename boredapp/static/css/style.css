@@ -73,7 +73,7 @@ a, a:hover {
     width:65%;
 }
 
-.signupform {
+.pwrequirementstext {
   max-width: 590px; /* Limits the width of the element to 590 pixels */
   word-wrap: break-word; /* Wraps long words within the specified width */
   margin: 0 auto; /* Centers the element horizontally */
