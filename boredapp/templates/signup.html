@@ -26,15 +26,16 @@
      {% endif%}
      {% endwith %}
 
+<div class="loginsignup">
 
 
-<a href="{{ url_for('home') }}"><h1>The BoredApp</h1></a>
+<a href="{{ url_for('home') }}"><h1 class="boredapptitle">The BoredApp</h1></a>
 <h4> Sign up to get amazing activity ideas </h4>
 
 
 
 <!-- WTF-Flask FORM -->
-<form action="#" method="POST">
+<form  class ="loginsignupforgotform"  action="#" method="POST">
     {{ form.hidden_tag() }}  <!-- This will create our csrf token-->
     <p>{{ form.firstname(placeholder="Firstname") }}</p>
     <p>{{ form.lastname(placeholder="Lastname") }}</p>
@@ -45,9 +46,11 @@
 </form>
 <br>
 
-<h6> Your password needs to be at least 8 characters long, have one uppercase letter, one lowercase letter, one digit, and one special character(@, !, #, $, %, ^, &)
+<h6 class="signupform"> Your password needs to be at least 8 characters long, have one uppercase letter, one lowercase letter, one digit, and one special character(@, !, #, $, %, ^, &)
 </h6>
 
-<p>Have an Account?<a href="{{url_for('login')}}"> Log in</a></p>
+<br>
 
+<p>Have an Account?<a href="{{url_for('login')}}"> Log in</a></p>
+</div>
 {% endblock %}
