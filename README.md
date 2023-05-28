@@ -15,7 +15,6 @@ This version uses the MySQL database, there is an alternate 'postgress' branch c
 <img width="380" alt="image" src="https://github.com/daniellaomokore/BoredApp/assets/79287671/bbb39569-3fc3-4a17-b5b0-40ec2d6a92fa">
 <img width="917" alt="image" src="https://github.com/daniellaomokore/BoredApp/assets/79287671/dddd9af3-87e2-4dbd-a515-a272ebbabeb5">
 <img width="920" alt="image" src="https://github.com/daniellaomokore/BoredApp/assets/79287671/eaad3bc8-a2d3-45fa-b591-cb6c288b7c25">
-<img width="916" alt="image" src="https://github.com/daniellaomokore/BoredApp/assets/79287671/9448e2d3-83cb-434b-87a1-72864355f78f">
 
 
 ## ✨<b>My Favourite Features:</b>
