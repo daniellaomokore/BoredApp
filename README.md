@@ -8,6 +8,13 @@
 Video Demo Link: https://clipchamp.com/watch/ZVdVr6OEF1Z
  
 This version uses the Postgres database, there is an alternate 'main' branch compatible with MySQL.
+ 
+  
+<img width="552" alt="image" src="https://github.com/daniellaomokore/BoredApp/assets/79287671/3ce688bb-629f-4950-b5c0-c7fb53df7676">
+<img width="415" alt="image" src="https://github.com/daniellaomokore/BoredApp/assets/79287671/7f51ea32-2b73-4c73-aae7-18f4e7854869"><img width="395" alt="image" src="https://github.com/daniellaomokore/BoredApp/assets/79287671/381ec885-544c-4b94-890a-db91255ec475">
+<img width="380" alt="image" src="https://github.com/daniellaomokore/BoredApp/assets/79287671/bbb39569-3fc3-4a17-b5b0-40ec2d6a92fa">
+<img width="917" alt="image" src="https://github.com/daniellaomokore/BoredApp/assets/79287671/dddd9af3-87e2-4dbd-a515-a272ebbabeb5">
+<img width="920" alt="image" src="https://github.com/daniellaomokore/BoredApp/assets/79287671/eaad3bc8-a2d3-45fa-b591-cb6c288b7c25">
 
 ## ✨<b>My Favourite Features:</b>
 
